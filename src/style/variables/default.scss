@@ -1,0 +1,29 @@
+$hd: 2 !default; // 基本单位
+
+/* The Color of O2Team Brand */
+$color-brand: #32B16F !default;
+
+/* Button */
+$at-button-height: 82px !default;
+$at-button-color: $color-brand !default;
+$at-button-border-color-primary: transparent !default;
+$at-button-bg: $at-button-color !default;
+$at-button-radius: 16px;
+
+/* Text Color */
+$color-text-base: #333 !default; // 文字的基本色
+
+/* 透明度 */
+$opacity-active: 0.6 !default; // Button 等组件点击态额透明度
+$opacity-disabled: 0.3 !default; // Button 等组件禁用态的透明度
+
+
+/* Font */
+$font-size-lg: 17px * $hd !default; // 常规标题
+
+
+/* 边框颜色 */
+$color-border-base: #C5D9E8 !default;
+
+/* Text Color */
+$color-text-base-inverse: #FFF !default; // 反色

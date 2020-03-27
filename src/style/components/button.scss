@@ -1,0 +1,61 @@
+@import '../variables/default.scss';
+@import '../mixins/index.scss';
+
+.zo-button {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  height: $at-button-height;
+  color: $color-text-base;
+  font-size: $font-size-lg;
+  line-height: $at-button-height - 2;
+  text-align: center;
+  border: 1PX solid $color-border-base;
+  box-sizing: border-box;
+  &:active {
+    opacity: $opacity-active;
+  }
+  &__wxbutton {
+    position: absolute;
+    padding: 0;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    opacity: 0;
+    z-index: 1;
+
+    &::after {
+      display: none;
+    }
+  }
+  /* modifiers */
+  &--active {
+    opacity: $opacity-active;
+  }
+
+  &--disabled {
+    opacity: $opacity-disabled;
+
+    &:active {
+      opacity: $opacity-disabled;
+    }
+  }
+  &--primary {
+    color: $color-text-base-inverse;
+    border: 1PX solid $at-button-border-color-primary;
+    background: $at-button-bg;
+  }
+  &--circle {
+    border-radius: $at-button-radius / 2;
+    background-clip: border-box;
+    overflow: hidden;
+  }
+  &__text {
+    display: inline;
+  }
+}
