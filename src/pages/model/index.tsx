@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 // components
-import { default as ZOModal } from '../../components/model'
+import { default as ZOModel } from '../../components/model'
 
 import { connect } from '@tarojs/redux'
 
@@ -82,9 +82,9 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <ZOModal title='标题' cancelText="取消" confirmText="我知道了" isOpened={ true }>
+        <ZOModel title='标题' cancelText="取消" confirmText="我知道了" isOpened={ true }>
           2222
-        </ZOModal>
+        </ZOModel>
       </View>
     )
   }

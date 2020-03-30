@@ -2,7 +2,7 @@ import { ComponentClass } from "react"
 import { CommonEventFunction } from "@tarojs/components/types/common"
 import ZOComponent from "./base"
 
-export interface ZOModalProps extends ZOComponent {
+export interface ZOModelProps extends ZOComponent {
   /**
    * 元素的标题
    */
@@ -43,19 +43,19 @@ export interface ZOModalProps extends ZOComponent {
   onConfirm?: CommonEventFunction
 }
 
-export interface ZOModalState {
+export interface ZOModelState {
   _isOpened: boolean
   isWEB: boolean
 }
 
-export interface ZOModalActionProps extends ZOComponent {
+export interface ZOModelActionProps extends ZOComponent {
   isSimple: boolean
 }
 
-export interface ZOModalContentProps extends ZOComponent {}
+export interface ZOModelContentProps extends ZOComponent {}
 
-export interface ZOModalHeaderProps extends ZOComponent {}
+export interface ZOModelHeaderProps extends ZOComponent {}
 
-declare const ZOModal: ComponentClass<ZOModalProps>
+declare const ZOModel: ComponentClass<ZOModelProps>
 
-export default ZOModal
+export default ZOModel

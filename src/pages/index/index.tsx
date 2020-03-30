@@ -4,7 +4,6 @@ import { View } from '@tarojs/components'
 
 // components
 import { default as ZOButton } from '../../components/button'
-import { default as ZOModal } from '../../components/modal'
 
 import { connect } from '@tarojs/redux'
 
@@ -84,9 +83,6 @@ class Index extends Component {
     return (
       <View className='index'>
         <ZOButton type="primary" circle={true}>111</ZOButton>
-        <ZOModal content="222" confirmText="我知道了" isOpened={ true }>
-          2222
-        </ZOModal>
       </View>
     )
   }

@@ -1,6 +1,6 @@
-import AtComponent from '../../common/component'
+import ZOComponent from '../../common/component'
 import classNames from 'classnames'
-import { AtButtonProps, AtButtonState } from 'types/button'
+import { ZOButtonProps, ZOButtonState } from 'types/button'
 import Taro from '@tarojs/taro'
 import { View, Button } from '@tarojs/components'
 import { CommonEvent } from '@tarojs/components/types/common'
@@ -10,13 +10,13 @@ const TYPE_CLASS = {
   secondary: 'secondary'
 }
 
-export default class AtButton extends AtComponent<
-  AtButtonProps,
-  AtButtonState
+export default class ZOButton extends ZOComponent<
+  ZOButtonProps,
+  ZOButtonState
 > {
 
-  public static defaultProps: AtButtonProps
-  public constructor(props: AtButtonProps) {
+  public static defaultProps: ZOButtonProps
+  public constructor(props: ZOButtonProps) {
     super(props)
     this.state = {
       isWEB: Taro.getEnv() === Taro.ENV_TYPE.WEB,
@@ -64,7 +64,7 @@ export default class AtButton extends AtComponent<
   }
 }
 
-AtButton.defaultProps = {
+ZOButton.defaultProps = {
   onClick: () => {},
   type: undefined,
 }
