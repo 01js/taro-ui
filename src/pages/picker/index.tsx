@@ -3,7 +3,7 @@ import Taro, { Component, Config } from '@tarojs/taro'
 import { View } from '@tarojs/components'
 
 // components
-import { default as ZONavBar } from '../../components/nav-bar'
+import { default as ZOPicker } from '../../components/picker'
 
 import { connect } from '@tarojs/redux'
 
@@ -82,9 +82,9 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <ZONavBar leftIconType='chevron-left'>
+        <ZOPicker>
           111
-        </ZONavBar>
+        </ZOPicker>
       </View>
     )
   }

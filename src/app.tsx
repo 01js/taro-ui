@@ -27,6 +27,8 @@ class App extends Component {
    */
   config: Config = {
     pages: [
+      'pages/picker-view/index',
+      'pages/picker/index',
       'pages/model/index',
       'pages/nav-bar/index',
       'pages/index/index',
