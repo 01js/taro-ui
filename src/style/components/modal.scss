@@ -1,0 +1,104 @@
+@import '../variables/default.scss';
+@import '../mixins/index.scss';
+
+$zo-modal-duration: 200ms;
+.zo-modal {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  visibility: hidden;
+  transition: visibility $zo-modal-duration ease-in;
+  z-index: $zindex-modal;
+  &__overlay,
+  &__container {
+    opacity: 0;
+    transition: opacity $zo-modal-duration ease-in;
+  }
+
+  &__overlay {
+    @include overlay;
+  }
+  &__container {
+    @include absolute-center();
+
+    width: $zo-modal-width;
+    border-radius: $border-radius-lg;
+    background-color: $zo-modal-bg-color;
+    overflow: hidden;
+  }
+  &__header {
+    @include hairline-bottom-relative($color: $color-grey-4);
+    @include line(1);
+
+    padding: $spacing-v-md $spacing-h-lg;
+    color: $zo-modal-header-text-color;
+    font-size: $font-size-lg;
+    text-align: center;
+  }
+
+  &__content {
+    padding: $spacing-h-xl $spacing-h-lg;
+    min-height: 180px;
+    max-height: 840px;
+    color: $zo-modal-content-text-color;
+    font-size: $font-size-base;
+    box-sizing: content-box;
+    width: auto;
+  }
+  &__footer {
+    @include hairline-top-relative($color: $color-grey-4);
+
+    .zo-modal__action {
+      @include display-flex;
+
+      & > button {
+        @include flex(auto);
+        @include line(1);
+        @include active;
+
+        margin-top: 0;
+        min-width: 160px;
+        height: 110px;
+        color: $zo-modal-btn-default-color;
+        font-size: $font-size-lg;
+        line-height: 108px;
+        outline: 0;
+        border: 0;
+        border-radius: 0;
+        background-color: transparent;
+        font-weight: 500;
+
+        &::after {
+          border: 0;
+          border-radius: 0;
+          width: initial;
+          height: initial;
+        }
+
+        &:not(:first-child) {
+          @include hairline-left-relative($color: $color-grey-4);
+        }
+
+        &:last-child {
+          color: $zo-modal-btn-confirm-color;
+        }
+      }
+    }
+
+    &--simple .zo-modal__action > button:last-child:nth-child(2) {
+      color: $zo-modal-btn-confirm-color;
+    }
+  }
+  &--active {
+    visibility: visible;
+
+    .zo-modal__overlay,
+    .zo-modal__container {
+      opacity: 1;
+    }
+  }
+}
+
+

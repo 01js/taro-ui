@@ -6,10 +6,10 @@
   display: flex;
   justify-content: center;
   margin: 0 auto;
-  height: $at-button-height;
+  height: $zo-button-height;
   color: $color-text-base;
   font-size: $font-size-lg;
-  line-height: $at-button-height - 2;
+  line-height: $zo-button-height - 2;
   text-align: center;
   border: 1PX solid $color-border-base;
   box-sizing: border-box;
@@ -47,11 +47,11 @@
   }
   &--primary {
     color: $color-text-base-inverse;
-    border: 1PX solid $at-button-border-color-primary;
-    background: $at-button-bg;
+    border: 1PX solid $zo-button-border-color-primary;
+    background: $zo-button-bg;
   }
   &--circle {
-    border-radius: $at-button-radius / 2;
+    border-radius: $zo-button-radius / 2;
     background-clip: border-box;
     overflow: hidden;
   }
