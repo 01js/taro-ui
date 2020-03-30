@@ -1,13 +1,13 @@
 import classNames from 'classnames'
 import PropTypes, { InferProps } from 'prop-types'
-import { AtModalActionProps } from 'types/modal'
+import { ZOModalActionProps } from 'types/modal'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import AtComponent from '../../../common/component'
+import ZOComponent from '../../../common/component'
 
-export default class AtModalAction extends AtComponent<AtModalActionProps> {
-  public static defaultProps: AtModalActionProps
-  public static propTypes: InferProps<AtModalActionProps>
+export default class ZOModalAction extends ZOComponent<ZOModalActionProps> {
+  public static defaultProps: ZOModalActionProps
+  public static propTypes: InferProps<ZOModalActionProps>
 
   public render(): JSX.Element {
     const rootClass = classNames(
@@ -26,10 +26,10 @@ export default class AtModalAction extends AtComponent<AtModalActionProps> {
   }
 }
 
-AtModalAction.defaultProps = {
+ZOModalAction.defaultProps = {
   isSimple: false
 }
 
-AtModalAction.propTypes = {
+ZOModalAction.propTypes = {
   isSimple: PropTypes.bool
 }

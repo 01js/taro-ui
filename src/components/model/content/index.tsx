@@ -1,10 +1,10 @@
 import classNames from 'classnames'
-import { AtModalContentProps } from 'types/modal'
+import { ZOModalContentProps } from 'types/modal'
 import { ScrollView } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import AtComponent from '../../../common/component'
+import ZOComponent from '../../../common/component'
 
-export default class AtModalContent extends AtComponent<AtModalContentProps> {
+export default class ZOModalContent extends ZOComponent<ZOModalContentProps> {
   public render(): JSX.Element {
     const rootClass = classNames('zo-modal__content', this.props.className)
     return (

@@ -1,10 +1,10 @@
 import classNames from 'classnames'
-import { AtModalHeaderProps } from 'types/modal'
+import { ZOModalHeaderProps } from 'types/modal'
 import { View } from '@tarojs/components'
 import Taro from '@tarojs/taro'
-import AtComponent from '../../../common/component'
+import ZOComponent from '../../../common/component'
 
-export default class AtModalHeader extends AtComponent<AtModalHeaderProps> {
+export default class ZOModalHeader extends ZOComponent<ZOModalHeaderProps> {
   public render(): JSX.Element {
     const rootClass = classNames('zo-modal__header', this.props.className)
     return <View className={rootClass}>{this.props.children}</View>

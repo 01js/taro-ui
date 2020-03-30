@@ -1,8 +1,8 @@
 import { ComponentClass } from "react"
 import { CommonEventFunction } from "@tarojs/components/types/common"
-import AtComponent from "./base"
+import ZOComponent from "./base"
 
-export interface AtModalProps extends AtComponent {
+export interface ZOModalProps extends ZOComponent {
   /**
    * 元素的标题
    */
@@ -43,19 +43,19 @@ export interface AtModalProps extends AtComponent {
   onConfirm?: CommonEventFunction
 }
 
-export interface AtModalState {
+export interface ZOModalState {
   _isOpened: boolean
   isWEB: boolean
 }
 
-export interface AtModalActionProps extends AtComponent {
+export interface ZOModalActionProps extends ZOComponent {
   isSimple: boolean
 }
 
-export interface AtModalContentProps extends AtComponent {}
+export interface ZOModalContentProps extends ZOComponent {}
 
-export interface AtModalHeaderProps extends AtComponent {}
+export interface ZOModalHeaderProps extends ZOComponent {}
 
-declare const AtModal: ComponentClass<AtModalProps>
+declare const ZOModal: ComponentClass<ZOModalProps>
 
-export default AtModal
+export default ZOModal

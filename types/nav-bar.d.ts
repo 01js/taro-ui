@@ -1,9 +1,9 @@
 import { MouseEvent, ComponentClass } from 'react'
 import { CommonEventFunction } from '@tarojs/components/types/common'
 
-import AtComponent, { AtIconBaseProps } from './base'
+import ZOComponent, { ZOIconBaseProps } from './base'
 
-export interface AtNavBarProps extends AtComponent {
+export interface ZONavBarProps extends ZOComponent {
   /**
    * 标题文字
    */
@@ -25,22 +25,22 @@ export interface AtNavBarProps extends AtComponent {
    */
   color?: string
   /**
-   * 左边图标类型，图标类型请看 AtIcon 文档
+   * 左边图标类型，图标类型请看 ZOIcon 文档
    * @default 'chevron-left'
    */
-  leftIconType?: string | AtIconBaseProps
+  leftIconType?: string | ZOIconBaseProps
   /**
    * 左边文字
    */
   leftText?: string
   /**
-   * 从右到左，第一个图标类型，图标类型请看 AtIcon 文档
+   * 从右到左，第一个图标类型，图标类型请看 ZOIcon 文档
    */
-  rightFirstIconType?: string | AtIconBaseProps
+  rightFirstIconType?: string | ZOIconBaseProps
   /**
-   * 从右到左第二个图标类型，图标类型请看 AtIcon 文档
+   * 从右到左第二个图标类型，图标类型请看 ZOIcon 文档
    */
-  rightSecondIconType?: string | AtIconBaseProps
+  rightSecondIconType?: string | ZOIconBaseProps
   /**
    * 左边第一个图标类型点击事件
    */
@@ -55,6 +55,6 @@ export interface AtNavBarProps extends AtComponent {
   onClickRgIconNd?: CommonEventFunction
 }
 
-declare const AtNavBar: ComponentClass<AtNavBarProps>
+declare const ZONavBar: ComponentClass<ZONavBarProps>
 
-export default AtNavBar
+export default ZONavBar

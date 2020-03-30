@@ -1,18 +1,18 @@
 import { CSSProperties } from 'react'
 
-export interface AtComponent {
+export interface ZOComponent {
   className?: string
 
   customStyle?: string | CSSProperties
 }
 
-export interface AtIconBaseProps2 extends AtComponent {
+export interface ZOIconBaseProps2 extends ZOComponent {
   value: string
 
   color?: string
 }
 
-export interface AtIconBaseProps extends AtComponent {
+export interface ZOIconBaseProps extends ZOComponent {
   value: string
 
   color?: string
@@ -22,4 +22,4 @@ export interface AtIconBaseProps extends AtComponent {
   size?: number | string
 }
 
-export default AtComponent
+export default ZOComponent

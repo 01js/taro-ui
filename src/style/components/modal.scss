@@ -29,22 +29,23 @@ $zo-modal-duration: 200ms;
     overflow: hidden;
   }
   &__header {
-    @include hairline-bottom-relative($color: $color-grey-4);
-    @include line(1);
 
-    padding: $spacing-v-md $spacing-h-lg;
-    color: $zo-modal-header-text-color;
-    font-size: $font-size-lg;
+    margin-top: 64px;
+    color: #000;
+    font-size: 34px;
+    font-weight:500;
     text-align: center;
   }
-
+  &__header + &__content {
+    min-height: 192px;
+  }
   &__content {
     padding: $spacing-h-xl $spacing-h-lg;
-    min-height: 180px;
+    min-height: 208px;
     max-height: 840px;
     color: $zo-modal-content-text-color;
     font-size: $font-size-base;
-    box-sizing: content-box;
+    box-sizing: border-box;
     width: auto;
   }
   &__footer {

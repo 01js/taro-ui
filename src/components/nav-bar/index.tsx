@@ -1,18 +1,18 @@
 import classNames from 'classnames'
 import isObject from 'lodash/isObject'
 import PropTypes, { InferProps } from 'prop-types'
-import { AtNavBarProps } from 'types/nav-bar'
+import { ZONavBarProps } from 'types/nav-bar'
 import { Text, View } from '@tarojs/components'
 import { ITouchEvent } from '@tarojs/components/types/common'
 import Taro from '@tarojs/taro'
-import AtComponent from '../../common/component'
+import ZOComponent from '../../common/component'
 import { initTestEnv } from '../../common/utils'
 
 initTestEnv()
 
-export default class AtNavBar extends AtComponent<AtNavBarProps> {
-  public static defaultProps: AtNavBarProps
-  public static propTypes: InferProps<AtNavBarProps>
+export default class ZONavBar extends ZOComponent<ZONavBarProps> {
+  public static defaultProps: ZONavBarProps
+  public static propTypes: InferProps<ZONavBarProps>
 
   private handleClickLeftView(event: ITouchEvent): void {
     this.props.onClickLeftIcon && this.props.onClickLeftIcon(event)
@@ -172,7 +172,7 @@ export default class AtNavBar extends AtComponent<AtNavBarProps> {
   }
 }
 
-AtNavBar.defaultProps = {
+ZONavBar.defaultProps = {
   customStyle: '',
   className: '',
   fixed: false,
@@ -188,7 +188,7 @@ AtNavBar.defaultProps = {
   onClickRgIconNd: () => {}
 }
 
-AtNavBar.propTypes = {
+ZONavBar.propTypes = {
   customStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   fixed: PropTypes.bool,

@@ -1,21 +1,21 @@
 import classNames from 'classnames'
 import _isFunction from 'lodash/isFunction'
 import PropTypes, { InferProps } from 'prop-types'
-import { AtModalProps, AtModalState } from 'types/modal'
+import { ZOModalProps, ZOModalState } from 'types/modal'
 import { Button, Text, View } from '@tarojs/components'
 import { CommonEvent } from '@tarojs/components/types/common'
 import Taro from '@tarojs/taro'
-import AtComponent from '../../common/component'
+import ZOComponent from '../../common/component'
 import { handleTouchScroll } from '../../common/utils'
-import AtModalAction from './action/index'
-import AtModalContent from './content/index'
-import AtModalHeader from './header/index'
+import ZOModalAction from './action/index'
+import ZOModalContent from './content/index'
+import ZOModalHeader from './header/index'
 
-export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
-  public static defaultProps: AtModalProps
-  public static propTypes: InferProps<AtModalProps>
+export default class ZOModal extends ZOComponent<ZOModalProps, ZOModalState> {
+  public static defaultProps: ZOModalProps
+  public static propTypes: InferProps<ZOModalProps>
 
-  public constructor(props: AtModalProps) {
+  public constructor(props: ZOModalProps) {
     super(props)
     const { isOpened } = props
     this.state = {
@@ -24,7 +24,7 @@ export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: AtModalProps): void {
+  public componentWillReceiveProps(nextProps: ZOModalProps): void {
     const { isOpened } = nextProps
 
     if (this.props.isOpened !== isOpened) {
@@ -82,7 +82,7 @@ export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
       this.props.className
     )
 
-    if (title || content) {
+    if (content) {
       const isRenderAction = cancelText || confirmText
       return (
         <View className={rootClass}>
@@ -92,12 +92,12 @@ export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
           />
           <View className='zo-modal__container'>
             {title && (
-              <AtModalHeader>
+              <ZOModalHeader>
                 <Text>{title}</Text>
-              </AtModalHeader>
+              </ZOModalHeader>
             )}
             {content && (
-              <AtModalContent>
+              <ZOModalContent>
                 <View className='content-simple'>
                   {isWEB ? (
                     <Text
@@ -109,17 +109,17 @@ export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
                     <Text>{content}</Text>
                   )}
                 </View>
-              </AtModalContent>
+              </ZOModalContent>
             )}
             {isRenderAction && (
-              <AtModalAction isSimple>
+              <ZOModalAction isSimple>
                 {cancelText && (
                   <Button onClick={this.handleCancel}>{cancelText}</Button>
                 )}
                 {confirmText && (
                   <Button onClick={this.handleConfirm}>{confirmText}</Button>
                 )}
-              </AtModalAction>
+              </ZOModalAction>
             )}
           </View>
         </View>
@@ -129,18 +129,40 @@ export default class AtModal extends AtComponent<AtModalProps, AtModalState> {
     return (
       <View onTouchMove={this.handleTouchMove} className={rootClass}>
         <View className='zo-modal__overlay' onClick={this.handleClickOverlay} />
-        <View className='zo-modal__container'>{this.props.children}</View>
+        <View className='zo-modal__container'>
+          {title && (
+            <ZOModalHeader>
+              <Text>{title}</Text>
+            </ZOModalHeader>
+          )}
+          <ZOModalContent>
+            <View className='content-simple'>
+              {this.props.children}
+            </View>
+          </ZOModalContent>
+
+          {(cancelText || confirmText) && (
+            <ZOModalAction isSimple>
+              {cancelText && (
+                <Button onClick={this.handleCancel}>{cancelText}</Button>
+              )}
+              {confirmText && (
+                <Button onClick={this.handleConfirm}>{confirmText}</Button>
+              )}
+            </ZOModalAction>
+          )}
+        </View>
       </View>
     )
   }
 }
 
-AtModal.defaultProps = {
+ZOModal.defaultProps = {
   isOpened: false,
   closeOnClickOverlay: true
 }
 
-AtModal.propTypes = {
+ZOModal.propTypes = {
   title: PropTypes.string,
   isOpened: PropTypes.bool,
   onCancel: PropTypes.func,
