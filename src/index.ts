@@ -6,3 +6,4 @@ Taro.initPxTransform({ designWidth: 750, deviceRatio: {} })
 export { default as ZOButton } from './components/button'
 export { default as ZOModel } from './components/model'
 export { default as ZONavBar } from './components/nav-bar'
+export { default as ZODefaultPage } from './components/default-page'
