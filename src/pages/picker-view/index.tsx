@@ -1,6 +1,6 @@
 import { ComponentClass } from 'react'
 import Taro, { Component, Config } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { View, Text, Picker } from '@tarojs/components'
 
 // components
 import { default as ZOPickerView } from '../../components/picker-view'
@@ -11,6 +11,8 @@ import { add, minus, asyncAdd } from '../../actions/counter'
 
 import './index.scss'
 
+const LINE_HEIGHT = 56
+const TOP = 56
 // #region 书写注意
 //
 // 目前 typescript 版本还无法在装饰器模式下将 Props 注入到 Taro.Component 中的 props 属性
@@ -35,7 +37,12 @@ type PageDispatchProps = {
 
 type PageOwnProps = {}
 
-type PageState = {}
+type PageState = {
+  height: Array<any>,
+  selector: Array<any>,
+  selectorChecked: string,
+  index: Array<any>,
+}
 
 type IProps = PageStateProps & PageDispatchProps & PageOwnProps
 
@@ -65,25 +72,71 @@ class Index extends Component {
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-    config: Config = {
+  config: Config = {
     navigationBarTitleText: '首页'
   }
+  constructor (props) {
+    super(props)
+    this.handlePrpos()
+    this.state = {
+      height: [],
+      selector: ['美国', '中国', '巴西', '日本'],
+      selectorChecked: '美国',
+      index: []
+    }
+  }
 
+  handlePrpos (nextProps = this.props) {
+    this.setState(() =>({
+      index: [0]
+    }))
+  }
   componentWillReceiveProps (nextProps) {
     console.log(this.props, nextProps)
   }
 
   componentWillUnmount () { }
 
-  componentDidShow () { }
+  componentDidShow () {
+    const height = this.state.index.map((i, idx) => {
+      let factor = 0
+
+      return TOP - LINE_HEIGHT * i - factor
+    })
+
+    this.setState({
+      hidden: false,
+      height
+    })
+  }
 
   componentDidHide () { }
-
+  updateHeight (height, columnId) {
+    console.log(height, columnId)
+    this.setState(prevState => {
+      prevState.height[columnId] = height
+      return { height: prevState.height }
+    })
+  }
+  onChange = e => {
+    this.setState({
+      selectorChecked: this.state.selector[e.detail.value]
+    })
+  }
   render () {
     return (
       <View className='index'>
-        <ZOPickerView>
-          111
+        <View className='page-section'>
+          <Text>地区选择器</Text>
+          <View>
+            <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
+              <View className='picker'>
+                当前选择：{this.state.selectorChecked}
+              </View>
+            </Picker>
+          </View>
+        </View>
+        <ZOPickerView height={this.state.height[0]} columnId={0} updateHeight={ this.updateHeight.bind(this) } range={[1, 2, 3, 4, 5, 6]}>
         </ZOPickerView>
       </View>
     )

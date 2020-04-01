@@ -1,7 +1,7 @@
 import classNames from 'classnames'
 import _isFunction from 'lodash/isFunction'
 import PropTypes, { InferProps } from 'prop-types'
-import { ZOModelProps, ZOModelState } from 'types/modal'
+import { ZOModelProps, ZOModelState } from 'types/model'
 import { Button, Text, View } from '@tarojs/components'
 import { CommonEvent } from '@tarojs/components/types/common'
 import Taro from '@tarojs/taro'

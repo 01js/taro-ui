@@ -82,8 +82,7 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <ZOPicker>
-          111
+        <ZOPicker value={['09:11']} mode='alarmClock'>
         </ZOPicker>
       </View>
     )

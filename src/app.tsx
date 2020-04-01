@@ -17,7 +17,6 @@ import './app.scss'
 const store = configStore()
 
 class App extends Component {
-
   /**
    * 指定config的类型声明为: Taro.Config
    *
@@ -27,8 +26,8 @@ class App extends Component {
    */
   config: Config = {
     pages: [
-      'pages/picker-view/index',
       'pages/picker/index',
+      'pages/picker-view/index',
       'pages/model/index',
       'pages/nav-bar/index',
       'pages/index/index',

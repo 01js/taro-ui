@@ -1,0 +1,50 @@
+
+.zo-picker-view {
+  flex: 1;
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+  &__indicator, &__mask {
+    width: 100%;
+    position: absolute;
+    left: 0;
+    z-index: 3;
+  }
+  &__mask {
+    position: absolute;
+    margin: 0 auto;
+    z-index: 3;
+    background: linear-gradient(180deg,rgba(255,255,255,.95),rgba(255,255,255,.6)),linear-gradient(0deg,rgba(255,255,255,.95),rgba(255,255,255,.6));
+    background-position: top,bottom;
+    background-size: 100% 102px;
+    background-repeat: no-repeat;
+    transform: translateZ(0);
+    top: 0;
+    height: 100%;
+  }
+  &__indicator {
+    height: 110px;
+    border-bottom: 2px solid rgba(229,229,229,1);
+    border-top: 2px solid rgba(229,229,229,1);
+    top: 112px;
+  }
+  &__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+  }
+  &__item {
+    padding: 0;
+    height: 112px;
+    line-height: 112px;
+    font-weight:600;
+    color:rgba(0,0,0,1);
+    font-size:40px;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+  }
+
+}
