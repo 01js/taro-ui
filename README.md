@@ -1,8 +1,10 @@
-# zo-taro-ui
-
 npm publish 发布
 
 # zo-taro-ui
+
+```bash
+npm install zo-taro-ui -s
+```
 
 ### 基本用法
 
