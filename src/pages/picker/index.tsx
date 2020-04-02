@@ -78,12 +78,21 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
-
+  onChange (e) {
+    console.log(e)
+  }
   render () {
     return (
       <View className='index'>
-        <ZOPicker value={['09:11']} mode='alarmClock'>
+        <ZOPicker onChange={this.onChange.bind(this)} value={['09:11']} mode='alarmClock'>
         </ZOPicker>
+
+        <ZOPicker onChange={this.onChange.bind(this)} value={['09:11:21']} mode='delay'>
+        </ZOPicker>
+
+        <ZOPicker onChange={this.onChange.bind(this)} value={['09:11']} mode='countDown'>
+        </ZOPicker>
+
       </View>
     )
   }

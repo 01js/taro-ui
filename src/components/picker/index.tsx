@@ -12,13 +12,23 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     this.handlePrpos()
     this.state = {
       height: [],
-      index: []
+      index: [],
+      hidden: true,
+      fadeOut: false
     }
   }
   private handlePrpos = (nextProps = this.props):void => {
     let { value, mode } = nextProps
     if (mode === 'alarmClock') {
-      let str = value ? value[0] : ':'
+      let str = value ? value[0] : '01:01'
+      const time = str.split(':').map(n => +n)
+      this.setState(() => ({
+        index: time
+      }), () => {
+        this.initHeight()
+      })
+    } else if (mode === 'delay') {
+      let str = value ? value[0] : '01:01:01'
       const time = str.split(':').map(n => +n)
       this.setState(() => ({
         index: time
@@ -50,15 +60,54 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       return { height: prevState.height }
     })
   }
-
+  getEventObj (e, type, detail) {
+    Object.defineProperties(e, {
+      detail: {
+        value: detail,
+        enumerable: true
+      },
+      type: {
+        value: type,
+        enumerable: true
+      }
+    })
+    return e
+  }
+  delayChange(height, columnId, e) {
+    setTimeout(() => {
+      this.onColumnChange(height, columnId, e)
+    }, 100)
+  }
   onColumnChange (height, columnId, e) {
-    if (this.props.mode === 'alarmClock') {
-      this.props.onChange && this.props.onChange(e)
+    let index = this.state.height.map(h => (TOP - h) / LINE_HEIGHT)
+
+    const eventObj = this.getEventObj(e, 'change', {
+      value: index.length > 1 ? index : index[0]
+    })
+    if (this.props.mode === 'alarmClock' || this.props.mode === 'delay') {
+      const range = [
+        [
+          ...this.getTimeRange(0, 23),
+        ],
+        [
+          ...this.getTimeRange(0, 59),
+        ],
+        [
+          ...this.getTimeRange(0, 59),
+        ]
+      ]
+      eventObj.detail.value = index.map((n, i) => range[i][n]).join(':')
+      this.props.onChange && this.props.onChange(eventObj)
     }
+  }
+  private showPicker () {
+    this.setState({
+      hidden: false
+    })
   }
   public render(): JSX.Element {
     // 闹钟
-    const getAlarmClock = () => {
+    const getAlarmClockOrCountDown = () => {
       const hourRange = [
         ...this.getTimeRange(0, 23),
       ]
@@ -67,7 +116,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       ]
       return ([
         <ZOPickerView
-          onColumnChange={ this.onColumnChange.bind(this) }
+          onColumnChange={ this.delayChange.bind(this) }
           range={hourRange}
           height={this.state.height[0]}
           updateHeight={this.updateHeight.bind(this)}
@@ -75,41 +124,101 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         >
         </ZOPickerView>,
         <ZOPickerView
-          onColumnChange={ this.onColumnChange.bind(this) }
+          onColumnChange={ this.delayChange.bind(this) }
+          range={minRange}
+          height={this.state.height[1]}
+          updateHeight={this.updateHeight.bind(this)}
+          columnId='1'
+        >
+        </ZOPickerView>
+      ])
+    }
+    const getDelay = () => {
+      const hourRange = [
+        ...this.getTimeRange(0, 23)
+      ]
+      const minRange = [
+        ...this.getTimeRange(0, 59)
+      ]
+      return ([
+        <ZOPickerView
+          onColumnChange={ this.delayChange.bind(this) }
+          range={hourRange}
+          height={this.state.height[0]}
+          updateHeight={this.updateHeight.bind(this)}
+          columnId='0'
+        >
+        </ZOPickerView>,
+        <ZOPickerView
+          onColumnChange={ this.delayChange.bind(this) }
           range={minRange}
           height={this.state.height[1]}
           updateHeight={this.updateHeight.bind(this)}
           columnId='1'
         >
         </ZOPickerView>,
+        <ZOPickerView
+          onColumnChange={ this.delayChange.bind(this) }
+          range={minRange}
+          height={this.state.height[2]}
+          updateHeight={this.updateHeight.bind(this)}
+          columnId='2'
+        >
+        </ZOPickerView>
       ])
     }
     let pickerView
     switch (this.props.mode) {
       case 'alarmClock':
-        pickerView = getAlarmClock()
+        pickerView = getAlarmClockOrCountDown()
+        break
+      case 'delay':
+        pickerView = getDelay()
+        break
+      case 'countDown':
+        pickerView = getAlarmClockOrCountDown()
+        break
       default:
-        pickerView = getAlarmClock()
+        pickerView = getAlarmClockOrCountDown()
     }
 
     const rootClass = classNames(
       'zo-picker',
       this.props.className
     )
-    if (this.props.mode === 'alarmClock') {
+    const clsMask = classNames('zo-picker__mask', 'zo-picker__animate-fade-in', {
+      'zo-picker__animate-fade-out': this.state.fadeOut
+    })
+    const clsSlider = classNames('zo-picker__content', 'zo-picker__animate-slide-up', {
+      'zo-picker__animate-slide-down': this.state.fadeOut
+    })
+    if (this.props.mode === 'alarmClock' || this.props.mode === 'delay' ) {
       return (
         <View className='zo-picker__bd'>
           {
             pickerView
           }
-          <View className="zo-picker__bd__desc">:</View>
+          {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
         </View>
       )
     } else {
       return (
-        <View className={rootClass}>
+        <View className={ rootClass }>
+          <View onClick={this.showPicker.bind(this)}>
+            {this.props.children}
+          </View>
           {
-            pickerView
+            !this.state.hidden && <View className={ clsMask }></View>
+          }
+          {
+            !this.state.hidden && <View className={ clsSlider }>
+              <View className='zo-picker__bd'>
+                {
+                  pickerView
+                }
+                {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
+              </View>
+            </View>
           }
         </View>
       )

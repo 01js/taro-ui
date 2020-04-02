@@ -82,6 +82,7 @@ class Index extends Component {
       height: [],
       selector: ['美国', '中国', '巴西', '日本'],
       selectorChecked: '美国',
+      timeSel: '12:01',
       index: []
     }
   }
@@ -120,7 +121,7 @@ class Index extends Component {
   }
   onChange = e => {
     this.setState({
-      selectorChecked: this.state.selector[e.detail.value]
+      timeSel: e.detail.value
     })
   }
   render () {
@@ -129,9 +130,9 @@ class Index extends Component {
         <View className='page-section'>
           <Text>地区选择器</Text>
           <View>
-            <Picker mode='selector' range={this.state.selector} onChange={this.onChange}>
+            <Picker mode='time' value="11:21" onChange={this.onChange}>
               <View className='picker'>
-                当前选择：{this.state.selectorChecked}
+                当前选择：{this.state.timeSel}
               </View>
             </Picker>
           </View>

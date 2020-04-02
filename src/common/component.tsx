@@ -14,7 +14,7 @@ const objectToString = (style: object | string): string => {
   return ''
 }
 
-export default class AtComponent<P = {}, S = {}> extends Component<P, S> {
+export default class ZOComponent<P = {}, S = {}> extends Component<P, S> {
   static options = {
     addGlobalClass: true
   }
