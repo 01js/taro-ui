@@ -1,6 +1,6 @@
 {
   "name": "zo-taro-ui",
-  "version": "1.0.6",
+  "version": "1.0.8",
   "description": "zo-taro-ui",
   "main": "dist/index.js",
   "main:h5": "dist/h5/index.js",
