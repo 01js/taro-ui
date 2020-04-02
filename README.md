@@ -2,6 +2,10 @@
 
 ### 基本用法
 
+```bash
+npm install zo-taro-ui -s
+```
+
 - action-sheet https://github.com/01js/zo-taro-ui/blob/v1/src/pages/action-sheet/index.tsx
 
 - default-page https://github.com/01js/zo-taro-ui/tree/v1/src/pages/default-page/index.tsx
