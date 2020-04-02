@@ -103,7 +103,7 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
     const range = this.props.range || []
     const pickerItem = range.map(item => {
       const content = item
-      return <div className='zo-picker-view__item'>{`${content}`}</div>
+      return <View className='zo-picker-view__item'>{`${content}${this.props.label}`}</View>
     })
     return (
       <View className={rootClass} onTouchStart={this.onTouchStart.bind(this)}

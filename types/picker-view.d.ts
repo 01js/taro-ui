@@ -36,7 +36,10 @@ export interface ZOPickerViewProps extends ZOComponent {
    * 新位置
    */
   newPos?: object
-
+  /**
+   * label
+   */
+  label?: string
   /**
    * 更新高度的事件
    */

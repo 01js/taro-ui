@@ -3,6 +3,7 @@ import { Text, View } from '@tarojs/components'
 import { ZOPickerProps, ZOPickerState } from 'types/picker'
 import ZOComponent from '../../common/component'
 import ZOPickerView from '../picker-view'
+import ZOActionSheet from '../action-sheet'
 const LINE_HEIGHT = 56
 const TOP = 56
 export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerState> {
@@ -14,12 +15,11 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       height: [],
       index: [],
       hidden: true,
-      fadeOut: false
     }
   }
   private handlePrpos = (nextProps = this.props):void => {
     let { value, mode } = nextProps
-    if (mode === 'alarmClock') {
+    if (mode === 'alarmClock' || mode === 'countDown') {
       let str = value ? value[0] : '01:01'
       const time = str.split(':').map(n => +n)
       this.setState(() => ({
@@ -74,17 +74,20 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     return e
   }
   delayChange(height, columnId, e) {
-    setTimeout(() => {
-      this.onColumnChange(height, columnId, e)
-    }, 100)
+    if (this.props.mode === 'alarmClock' || this.props.mode === 'delay') {
+      setTimeout(() => {
+        this.onColumnChange(height, columnId, e)
+      }, 100)
+    }
   }
-  onColumnChange (height, columnId, e) {
+  onChange (e) {
+    this.setState({ hidden: true })
     let index = this.state.height.map(h => (TOP - h) / LINE_HEIGHT)
 
     const eventObj = this.getEventObj(e, 'change', {
       value: index.length > 1 ? index : index[0]
     })
-    if (this.props.mode === 'alarmClock' || this.props.mode === 'delay') {
+    if (this.props.mode === 'alarmClock' || this.props.mode === 'delay' || this.props.mode === 'countDown') {
       const range = [
         [
           ...this.getTimeRange(0, 23),
@@ -100,6 +103,9 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       this.props.onChange && this.props.onChange(eventObj)
     }
   }
+  onColumnChange (height, columnId, e) {
+    this.onChange(e)
+  }
   private showPicker () {
     this.setState({
       hidden: false
@@ -107,7 +113,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
   }
   public render(): JSX.Element {
     // 闹钟
-    const getAlarmClockOrCountDown = () => {
+    const getAlarmClockOrCountDown = (label = ['','']) => {
       const hourRange = [
         ...this.getTimeRange(0, 23),
       ]
@@ -116,6 +122,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       ]
       return ([
         <ZOPickerView
+          label={label[0]}
           onColumnChange={ this.delayChange.bind(this) }
           range={hourRange}
           height={this.state.height[0]}
@@ -124,6 +131,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         >
         </ZOPickerView>,
         <ZOPickerView
+          label={label[1]}
           onColumnChange={ this.delayChange.bind(this) }
           range={minRange}
           height={this.state.height[1]}
@@ -133,7 +141,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         </ZOPickerView>
       ])
     }
-    const getDelay = () => {
+    const getDelay = (label = ['时','分', '秒']) => {
       const hourRange = [
         ...this.getTimeRange(0, 23)
       ]
@@ -142,6 +150,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       ]
       return ([
         <ZOPickerView
+          label={label[0]}
           onColumnChange={ this.delayChange.bind(this) }
           range={hourRange}
           height={this.state.height[0]}
@@ -150,6 +159,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         >
         </ZOPickerView>,
         <ZOPickerView
+          label={label[1]}
           onColumnChange={ this.delayChange.bind(this) }
           range={minRange}
           height={this.state.height[1]}
@@ -158,6 +168,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         >
         </ZOPickerView>,
         <ZOPickerView
+          label={label[2]}
           onColumnChange={ this.delayChange.bind(this) }
           range={minRange}
           height={this.state.height[2]}
@@ -170,28 +181,23 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     let pickerView
     switch (this.props.mode) {
       case 'alarmClock':
-        pickerView = getAlarmClockOrCountDown()
+        pickerView = getAlarmClockOrCountDown(['', ''])
         break
       case 'delay':
         pickerView = getDelay()
         break
       case 'countDown':
-        pickerView = getAlarmClockOrCountDown()
+        pickerView = getAlarmClockOrCountDown(['小时', '分钟'])
         break
       default:
-        pickerView = getAlarmClockOrCountDown()
+        pickerView = getAlarmClockOrCountDown(['', ''])
     }
 
     const rootClass = classNames(
       'zo-picker',
       this.props.className
     )
-    const clsMask = classNames('zo-picker__mask', 'zo-picker__animate-fade-in', {
-      'zo-picker__animate-fade-out': this.state.fadeOut
-    })
-    const clsSlider = classNames('zo-picker__content', 'zo-picker__animate-slide-up', {
-      'zo-picker__animate-slide-down': this.state.fadeOut
-    })
+
     if (this.props.mode === 'alarmClock' || this.props.mode === 'delay' ) {
       return (
         <View className='zo-picker__bd'>
@@ -208,17 +214,18 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
             {this.props.children}
           </View>
           {
-            !this.state.hidden && <View className={ clsMask }></View>
-          }
-          {
-            !this.state.hidden && <View className={ clsSlider }>
+            <ZOActionSheet isOpened={!this.state.hidden}>
+              <View className="zo-picker__hd">
+                <View className="zo-picker__hd__action">取消</View>
+                <View onClick={ this.onChange.bind(this)} className="zo-picker__hd__action">确定</View>
+              </View>
               <View className='zo-picker__bd'>
                 {
                   pickerView
                 }
                 {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
               </View>
-            </View>
+            </ZOActionSheet>
           }
         </View>
       )

@@ -7,7 +7,6 @@ export interface ZOPickerState {
   height: any
   index: any
   hidden: boolean
-  fadeOut: boolean
 }
 export interface ZOPickerProps extends ZOComponent {
   /**

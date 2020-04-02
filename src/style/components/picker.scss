@@ -1,6 +1,24 @@
 .zo-picker {
   height: 100%;
-
+  &__hd {
+    display: flex;
+    padding: 30px;
+    position: relative;
+    text-align: center;
+    font-size: 28px;
+    &__action {
+      display: block;
+      flex: 1;
+      color: #32B16F;
+      &:first-child {
+        text-align: left;
+        color: #888;
+      }
+      &:last-child {
+        text-align: right;
+      }
+    }
+  }
 }
 .zo-picker__bd {
   padding: 0 30px;

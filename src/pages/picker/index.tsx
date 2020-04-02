@@ -91,6 +91,7 @@ class Index extends Component {
         </ZOPicker>
 
         <ZOPicker onChange={this.onChange.bind(this)} value={['09:11']} mode='countDown'>
+          111
         </ZOPicker>
 
       </View>
