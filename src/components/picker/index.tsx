@@ -53,6 +53,10 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     }
     return range
   }
+  onCancel (e) {
+    const eventObj = this.getEventObj(e, 'cancel', {})
+    this.props.onCancel && this.props.onCancel(eventObj)
+  }
   updateHeight (height, columnId) {
     console.log(height, columnId)
     this.setState(prevState => {
@@ -216,7 +220,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
           {
             <ZOActionSheet isOpened={!this.state.hidden}>
               <View className="zo-picker__hd">
-                <View className="zo-picker__hd__action">取消</View>
+                <View onClick={ this.onCancel.bind(this)} className="zo-picker__hd__action">取消</View>
                 <View onClick={ this.onChange.bind(this)} className="zo-picker__hd__action">确定</View>
               </View>
               <View className='zo-picker__bd'>

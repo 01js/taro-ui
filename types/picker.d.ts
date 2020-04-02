@@ -21,6 +21,10 @@ export interface ZOPickerProps extends ZOComponent {
    * ColumnChange
    */
   onChange?: Function
+  /**
+   * ColumnChange
+   */
+  onCancel?: Function
 }
 
 declare const ZOPicker: ComponentClass<ZOPickerProps>
