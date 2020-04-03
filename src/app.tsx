@@ -33,7 +33,7 @@ class App extends Component {
       'pages/default-page/index',
       'pages/picker-view/index',
 
-      'pages/model/index',
+      'pages/modal/index',
 
       'pages/index/index',
     ],

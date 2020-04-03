@@ -1,21 +1,21 @@
 import classNames from 'classnames'
 import _isFunction from 'lodash/isFunction'
 import PropTypes, { InferProps } from 'prop-types'
-import { ZOModelProps, ZOModelState } from 'types/model'
+import { ZOModalProps, ZOModalState } from 'types/modal'
 import { Button, Text, View } from '@tarojs/components'
 import { CommonEvent } from '@tarojs/components/types/common'
 import Taro from '@tarojs/taro'
 import ZOComponent from '../../common/component'
 import { handleTouchScroll } from '../../common/utils'
-import ZOModelAction from './action/index'
-import ZOModelContent from './content/index'
-import ZOModelHeader from './header/index'
+import ZOModalAction from './action/index'
+import ZOModalContent from './content/index'
+import ZOModalHeader from './header/index'
 
-export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
-  public static defaultProps: ZOModelProps
-  public static propTypes: InferProps<ZOModelProps>
+export default class ZOModal extends ZOComponent<ZOModalProps, ZOModalState> {
+  public static defaultProps: ZOModalProps
+  public static propTypes: InferProps<ZOModalProps>
 
-  public constructor(props: ZOModelProps) {
+  public constructor(props: ZOModalProps) {
     super(props)
     const { isOpened } = props
     this.state = {
@@ -24,7 +24,7 @@ export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
     }
   }
 
-  public componentWillReceiveProps(nextProps: ZOModelProps): void {
+  public componentWillReceiveProps(nextProps: ZOModalProps): void {
     const { isOpened } = nextProps
 
     if (this.props.isOpened !== isOpened) {
@@ -92,12 +92,12 @@ export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
           />
           <View className='zo-modal__container'>
             {title && (
-              <ZOModelHeader>
+              <ZOModalHeader>
                 <Text>{title}</Text>
-              </ZOModelHeader>
+              </ZOModalHeader>
             )}
             {content && (
-              <ZOModelContent>
+              <ZOModalContent>
                 <View className='content-simple'>
                   {isWEB ? (
                     <Text
@@ -109,17 +109,17 @@ export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
                     <Text>{content}</Text>
                   )}
                 </View>
-              </ZOModelContent>
+              </ZOModalContent>
             )}
             {isRenderAction && (
-              <ZOModelAction isSimple>
+              <ZOModalAction isSimple>
                 {cancelText && (
                   <Button onClick={this.handleCancel}>{cancelText}</Button>
                 )}
                 {confirmText && (
                   <Button onClick={this.handleConfirm}>{confirmText}</Button>
                 )}
-              </ZOModelAction>
+              </ZOModalAction>
             )}
           </View>
         </View>
@@ -131,25 +131,25 @@ export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
         <View className='zo-modal__overlay' onClick={this.handleClickOverlay} />
         <View className='zo-modal__container'>
           {title && (
-            <ZOModelHeader>
+            <ZOModalHeader>
               <Text>{title}</Text>
-            </ZOModelHeader>
+            </ZOModalHeader>
           )}
-          <ZOModelContent>
+          <ZOModalContent>
             <View className='content-simple'>
               {this.props.children}
             </View>
-          </ZOModelContent>
+          </ZOModalContent>
 
           {(cancelText || confirmText) && (
-            <ZOModelAction isSimple>
+            <ZOModalAction isSimple>
               {cancelText && (
                 <Button onClick={this.handleCancel}>{cancelText}</Button>
               )}
               {confirmText && (
                 <Button onClick={this.handleConfirm}>{confirmText}</Button>
               )}
-            </ZOModelAction>
+            </ZOModalAction>
           )}
         </View>
       </View>
@@ -157,12 +157,12 @@ export default class ZOModel extends ZOComponent<ZOModelProps, ZOModelState> {
   }
 }
 
-ZOModel.defaultProps = {
+ZOModal.defaultProps = {
   isOpened: false,
   closeOnClickOverlay: true
 }
 
-ZOModel.propTypes = {
+ZOModal.propTypes = {
   title: PropTypes.string,
   isOpened: PropTypes.bool,
   onCancel: PropTypes.func,

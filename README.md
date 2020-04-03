@@ -14,7 +14,7 @@ npm install zo-taro-ui -s
 
 - button https://github.com/01js/zo-taro-ui/tree/v1/src/pages/index/index.tsx
 
-- model https://github.com/01js/zo-taro-ui/blob/v1/src/pages/model/index.tsx
+- modal https://github.com/01js/zo-taro-ui/blob/v1/src/pages/modal/index.tsx
 
 - nav-bar https://github.com/01js/zo-taro-ui/tree/v1/src/pages/nav-bar/index.tsx
 
