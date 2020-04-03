@@ -5,6 +5,10 @@ import ZOComponent, { ZOIconBaseProps } from './base'
 
 export interface ZONavBarProps extends ZOComponent {
   /**
+   * 头像
+   */
+  avatar?: any
+  /**
    * 标题文字
    */
   title?: string

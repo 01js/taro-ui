@@ -41,6 +41,19 @@ $zo-nav-bar-back-font-size: 16PX;
     text-align: right;
     overflow: hidden;
   }
+  &__avatar-wrap {
+    float: right;
+    width:56px;
+    height:56px;
+    margin-right: 30px;
+    line-height: 56px;
+    border-radius: 50%;
+    overflow: hidden;
+    .taro-img {
+      width:56px;
+      height:56px;
+    }
+  }
 
   &__title {
     flex: 5;

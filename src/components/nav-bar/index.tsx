@@ -2,7 +2,7 @@ import classNames from 'classnames'
 import isObject from 'lodash/isObject'
 import PropTypes, { InferProps } from 'prop-types'
 import { ZONavBarProps } from 'types/nav-bar'
-import { Text, View } from '@tarojs/components'
+import { Text, View, Image } from '@tarojs/components'
 import { ITouchEvent } from '@tarojs/components/types/common'
 import Taro from '@tarojs/taro'
 import ZOComponent from '../../common/component'
@@ -119,54 +119,62 @@ export default class ZONavBar extends ZOComponent<ZONavBarProps> {
         <View className='zo-nav-bar__title'>
           {title || this.props.children}
         </View>
-        <View className='zo-nav-bar__right-view'>
-          <View
-            className={classNames({
-              'zo-nav-bar__container': true,
-              'zo-nav-bar__container--hide': !rightSecondIconType
-            })}
-            style={linkStyle}
-            onClick={this.handleClickNd.bind(this)}
-          >
-            {rightSecondIconType && (
-              <Text
-                className={rightSecondIconClass}
-                style={this.mergeStyle(
-                  {
-                    color: rightSecondIconInfo.color,
-                    fontSize: `${Taro.pxTransform(
-                      parseInt(rightSecondIconInfo.size.toString()) * 2
-                    )}`
-                  },
-                  rightSecondIconInfo.customStyle
-                )}
-              ></Text>
-            )}
+        {
+          this.props.avatar ? <View className='zo-nav-bar__right-view'>
+            <View className="zo-nav-bar__avatar-wrap">
+              <Image src={this.props.avatar}/>
+            </View>
+          </View> :
+          <View className='zo-nav-bar__right-view'>
+            <View
+              className={classNames({
+                'zo-nav-bar__container': true,
+                'zo-nav-bar__container--hide': !rightSecondIconType
+              })}
+              style={linkStyle}
+              onClick={this.handleClickNd.bind(this)}
+            >
+              {rightSecondIconType && (
+                <Text
+                  className={rightSecondIconClass}
+                  style={this.mergeStyle(
+                    {
+                      color: rightSecondIconInfo.color,
+                      fontSize: `${Taro.pxTransform(
+                        parseInt(rightSecondIconInfo.size.toString()) * 2
+                      )}`
+                    },
+                    rightSecondIconInfo.customStyle
+                  )}
+                ></Text>
+              )}
+            </View>
+            <View
+              className={classNames({
+                'zo-nav-bar__container': true,
+                'zo-nav-bar__container--hide': !rightFirstIconType
+              })}
+              style={linkStyle}
+              onClick={this.handleClickSt.bind(this)}
+            >
+              {rightFirstIconType && (
+                <Text
+                  className={rightFirstIconClass}
+                  style={this.mergeStyle(
+                    {
+                      color: rightFirstIconInfo.color,
+                      fontSize: `${Taro.pxTransform(
+                        parseInt(rightFirstIconInfo.size.toString()) * 2
+                      )}`
+                    },
+                    rightFirstIconInfo.customStyle
+                  )}
+                ></Text>
+              )}
+            </View>
           </View>
-          <View
-            className={classNames({
-              'zo-nav-bar__container': true,
-              'zo-nav-bar__container--hide': !rightFirstIconType
-            })}
-            style={linkStyle}
-            onClick={this.handleClickSt.bind(this)}
-          >
-            {rightFirstIconType && (
-              <Text
-                className={rightFirstIconClass}
-                style={this.mergeStyle(
-                  {
-                    color: rightFirstIconInfo.color,
-                    fontSize: `${Taro.pxTransform(
-                      parseInt(rightFirstIconInfo.size.toString()) * 2
-                    )}`
-                  },
-                  rightFirstIconInfo.customStyle
-                )}
-              ></Text>
-            )}
-          </View>
-        </View>
+        }
+
       </View>
     )
   }

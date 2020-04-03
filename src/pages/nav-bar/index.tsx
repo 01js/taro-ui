@@ -8,7 +8,7 @@ import { default as ZONavBar } from '../../components/nav-bar'
 import { connect } from '@tarojs/redux'
 
 import { add, minus, asyncAdd } from '../../actions/counter'
-
+import pic from '../../../static/timg.jpg'
 import './index.scss'
 
 // #region 书写注意
@@ -83,6 +83,9 @@ class Index extends Component {
     return (
       <View className='index'>
         <ZONavBar leftIconType='chevron-left'>
+          111
+        </ZONavBar>
+        <ZONavBar avatar={ pic } leftIconType='chevron-left'>
           111
         </ZONavBar>
       </View>
