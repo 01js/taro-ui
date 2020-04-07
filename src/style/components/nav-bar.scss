@@ -16,6 +16,9 @@ $zo-nav-bar-back-font-size: 16PX;
   white-space: nowrap;
   overflow: hidden;
   @include hairline-bottom();
+  &--no-border {
+    @include hairline-bottom(#fff);
+  }
 
   /* elements */
   &__left-view {

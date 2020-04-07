@@ -184,7 +184,7 @@ ZONavBar.defaultProps = {
   customStyle: '',
   className: '',
   fixed: false,
-  border: true,
+  border: false,
   color: '',
   leftIconType: '',
   leftText: '',

@@ -82,7 +82,7 @@ class Index extends Component {
   render () {
     return (
       <View className='index'>
-        <ZONavBar leftIconType='chevron-left'>
+        <ZONavBar border={ true } leftIconType='chevron-left'>
           111
         </ZONavBar>
         <ZONavBar avatar={ pic } leftIconType='chevron-left'>
