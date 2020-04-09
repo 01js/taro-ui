@@ -197,6 +197,7 @@ ZONavBar.defaultProps = {
 }
 
 ZONavBar.propTypes = {
+  avatar: PropTypes.string,
   customStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.string]),
   className: PropTypes.oneOfType([PropTypes.array, PropTypes.string]),
   fixed: PropTypes.bool,
