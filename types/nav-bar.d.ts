@@ -57,6 +57,10 @@ export interface ZONavBarProps extends ZOComponent {
    * 从右到左第二个图标类型点击事件
    */
   onClickRgIconNd?: CommonEventFunction
+  /**
+   * 点击头像
+   */
+  handleClickAvatar?: CommonEventFunction
 }
 
 declare const ZONavBar: ComponentClass<ZONavBarProps>

@@ -78,14 +78,16 @@ class Index extends Component {
   componentDidShow () { }
 
   componentDidHide () { }
+  handleClickAvatar () {
 
+  }
   render () {
     return (
       <View className='index'>
         <ZONavBar border={ true } leftIconType='chevron-left'>
           111
         </ZONavBar>
-        <ZONavBar avatar={ pic } leftIconType='chevron-left'>
+        <ZONavBar avatar={ pic } handleClickAvatar={ this.handleClickAvatar.bind(this) } leftIconType='chevron-left'>
           111
         </ZONavBar>
       </View>

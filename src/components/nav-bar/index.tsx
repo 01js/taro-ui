@@ -26,6 +26,10 @@ export default class ZONavBar extends ZOComponent<ZONavBarProps> {
     this.props.onClickRgIconNd && this.props.onClickRgIconNd(event)
   }
 
+  private handleClickAvatar (event: ITouchEvent): void {
+    this.props.avatar && this.props.handleClickAvatar(event)
+  }
+
   public render(): JSX.Element {
     const {
       customStyle,
@@ -120,7 +124,7 @@ export default class ZONavBar extends ZOComponent<ZONavBarProps> {
           {title || this.props.children}
         </View>
         {
-          this.props.avatar ? <View className='zo-nav-bar__right-view'>
+          this.props.avatar ? <View onClick={ this.handleClickAvatar.bind(this) } className='zo-nav-bar__right-view'>
             <View className="zo-nav-bar__avatar-wrap">
               <Image src={this.props.avatar}/>
             </View>
@@ -193,7 +197,8 @@ ZONavBar.defaultProps = {
   rightSecondIconType: '',
   onClickLeftIcon: () => {},
   onClickRgIconSt: () => {},
-  onClickRgIconNd: () => {}
+  onClickRgIconNd: () => {},
+  handleClickAvatar: () => {},
 }
 
 ZONavBar.propTypes = {
@@ -213,5 +218,6 @@ ZONavBar.propTypes = {
   ]),
   onClickLeftIcon: PropTypes.func,
   onClickRgIconSt: PropTypes.func,
-  onClickRgIconNd: PropTypes.func
+  onClickRgIconNd: PropTypes.func,
+  handleClickAvatar: PropTypes.func
 }
