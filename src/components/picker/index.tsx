@@ -59,7 +59,6 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     this.setState({ hidden: true })
   }
   updateHeight (height, columnId) {
-    console.log(height, columnId)
     this.setState(prevState => {
       prevState.height[columnId] = height
       return { height: prevState.height }

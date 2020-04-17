@@ -28,7 +28,6 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
     }
   }
   private onTouchStart(event): void {
-    console.log(event)
     this.setState(() => ({
       startY: event.changedTouches[0].clientY,
       preY: event.changedTouches[0].clientY,
@@ -48,7 +47,6 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
           hadMove: true
         }))
       }
-      console.log(this.props.height)
       let newPos = this.props.height + deltaY
 
       if (_isFunction(this.props.updateHeight)) {
@@ -87,9 +85,7 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
 
       // 先按公式算出 index, 再用此 index 算出一个整数高度
       const index = Math.round(absoluteHeight / -LINE_HEIGHT)
-      console.log(`index--${index}`)
       const relativeHeight = TOP - LINE_HEIGHT * index
-      console.log(5, relativeHeight)
       updateHeight && updateHeight(relativeHeight, columnId)
       onColumnChange && onColumnChange(relativeHeight, columnId, event)
     })
