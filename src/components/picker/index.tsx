@@ -56,6 +56,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
   onCancel (e) {
     const eventObj = this.getEventObj(e, 'cancel', {})
     this.props.onCancel && this.props.onCancel(eventObj)
+    this.setState({ hidden: true })
   }
   updateHeight (height, columnId) {
     console.log(height, columnId)
@@ -104,6 +105,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
         ]
       ]
       eventObj.detail.value = index.map((n, i) => range[i][n]).join(':')
+
       this.props.onChange && this.props.onChange(eventObj)
     }
   }
