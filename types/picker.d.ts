@@ -10,6 +10,10 @@ export interface ZOPickerState {
 }
 export interface ZOPickerProps extends ZOComponent {
   /**
+   * 名称
+   */
+  title?: string
+  /**
    * 类型
    */
   mode?: string

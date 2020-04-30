@@ -4,8 +4,7 @@ import { ZOPickerProps, ZOPickerState } from 'types/picker'
 import ZOComponent from '../../common/component'
 import ZOPickerView from '../picker-view'
 import ZOActionSheet from '../action-sheet'
-const LINE_HEIGHT = 56
-const TOP = 56
+
 export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerState> {
 
   public constructor(props) {
@@ -38,6 +37,8 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     }
   }
   private initHeight = ():void => {
+    const LINE_HEIGHT = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
+    const TOP = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
     const height = this.state.index.map((i) => {
       let factor = 0
       return TOP - LINE_HEIGHT * i - factor
@@ -85,6 +86,8 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     }
   }
   onChange (e) {
+    const LINE_HEIGHT = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
+    const TOP = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
     this.setState({ hidden: true })
     let index = this.state.height.map(h => (TOP - h) / LINE_HEIGHT)
 
@@ -219,9 +222,14 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
             {this.props.children}
           </View>
           {
-            <ZOActionSheet isOpened={!this.state.hidden}>
+            <ZOActionSheet onClose={() => {this.setState({hidden: true})}} isOpened={!this.state.hidden}>
               <View className="zo-picker__hd">
                 <View onClick={ this.onCancel.bind(this)} className="zo-picker__hd__action">取消</View>
+                <View className="zo-picker__title">
+                {
+                  this.props.title
+                }
+                </View>
                 <View onClick={ this.onChange.bind(this)} className="zo-picker__hd__action">确定</View>
               </View>
               <View className='zo-picker__bd'>

@@ -19,6 +19,12 @@
       }
     }
   }
+  &__title {
+    font-size:32px;
+    font-weight:500;
+    color:rgba(0,0,0,1);
+    line-height:32px;
+  }
 }
 .zo-picker__bd {
   padding: 0 30px;
@@ -42,3 +48,4 @@
     line-height:56px;
   }
 }
+

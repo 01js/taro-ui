@@ -4,9 +4,7 @@ import { ZOPickerViewProps, ZOPickerViewState } from 'types/picker-view'
 import ZOComponent from '../../common/component'
 
 import _isFunction from 'lodash/isFunction'
-const LINE_HEIGHT = 56
-const MASK_HEIGHT = LINE_HEIGHT * 3
-const TOP = 56
+
 export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPickerViewState> {
 
   public constructor(props: ZOPickerViewProps) {
@@ -20,11 +18,22 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
   }
   private getPosition () {
     const transition = this.props.touchEnd ? 0.3 : 0
-    return {
-      'transform': `translate3d(0, ${this.props.height}px, 0)`,
-      '-webkit-transform': `translate3d(0, ${this.props.height}px, 0)`,
-      'transition': `transform ${transition}s`,
-      '-webkit-transition': `transform ${transition}s`
+    if (Taro.getEnv() === Taro.ENV_TYPE.WEB) {
+      let num = Number(document.getElementsByTagName('html')[0].style.fontSize.split('px')[0])
+      console.log(3333, num)
+      return {
+        'transform': `translate3d(0, ${(this.props.height/num).toFixed(3)}rem, 0)`,
+        '-webkit-transform': `translate3d(0, ${(this.props.height/num).toFixed(3)}rem, 0)`,
+        'transition': `transform ${transition}s`,
+        '-webkit-transition': `transform ${transition}s`
+      }
+    } else {
+      return {
+        'transform': `translate3d(0, ${this.props.height}px, 0)`,
+        '-webkit-transform': `translate3d(0, ${this.props.height}px, 0)`,
+        'transition': `transform ${transition}s`,
+        '-webkit-transition': `transform ${transition}s`
+      }
     }
   }
   private onTouchStart(event): void {
@@ -56,6 +65,9 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
     })
   }
   private onTouchEnd(event): void {
+    const LINE_HEIGHT = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
+    const MASK_HEIGHT = LINE_HEIGHT * 3
+    const TOP = Taro.getEnv() === Taro.ENV_TYPE.WEB ? document.getElementsByClassName('zo-picker-view__item')[0].offsetHeight : 56
     const {
       range,
       height,
@@ -99,7 +111,7 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
     const range = this.props.range || []
     const pickerItem = range.map(item => {
       const content = item
-      return <View className='zo-picker-view__item'>{`${content}`}<Text className='zo-picker-view__item__label'>{`${this.props.label}`}</Text></View>
+      return <View className='zo-picker-view__item'>{`${content}`}<Text className='zo-picker-view__item__label'>{`${this.props.label ? this.props.label : ''}`}</Text></View>
     })
     return (
       <View className={rootClass} onTouchStart={this.onTouchStart.bind(this)}

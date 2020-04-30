@@ -27,12 +27,13 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/picker/index',
+      'pages/picker-view/index',
+
       'pages/nav-bar/index',
 
       'pages/action-sheet/index',
-      'pages/picker-view/index',
       'pages/default-page/index',
-      'pages/picker-view/index',
+
 
       'pages/modal/index',
 
