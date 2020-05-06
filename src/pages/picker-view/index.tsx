@@ -138,7 +138,7 @@ class Index extends Component {
           </View>
         </View>
         <View className="picker-view-wrap">
-          <ZOPickerView height={this.state.height[0]} columnId={0} updateHeight={ this.updateHeight.bind(this) } range={[1, 2, 3, 4, 5, 6]}>
+          <ZOPickerView height={this.state.height[0]} columnId={0} updateHeight={ this.updateHeight.bind(this) } range={[1, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6, 2, 3, 4, 5, 6]}>
           </ZOPickerView>
         </View>
 
