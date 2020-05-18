@@ -9,7 +9,6 @@ import ZOComponent from '../../common/component'
 import { initTestEnv } from '../../common/utils'
 
 initTestEnv()
-
 export default class ZONavBar extends ZOComponent<ZONavBarProps> {
   public static defaultProps: ZONavBarProps
   public static propTypes: InferProps<ZONavBarProps>
@@ -97,7 +96,12 @@ export default class ZONavBar extends ZOComponent<ZONavBarProps> {
           },
           className
         )}
-        style={customStyle}
+        style={
+          {
+            ...customStyle,
+            'padding-top': Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? Number(Taro.$navBarMarginTop ? Taro.$navBarMarginTop : 0 ) + 44 + 'rpx' : ''
+          }
+        }
       >
         <View
           className='zo-nav-bar__left-view'

@@ -7,7 +7,7 @@ import ZOActionSheet from '../action-sheet'
 const LINE_HEIGHT = 56
 const TOP = 56
 export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerState> {
-
+  public static defaultProps: ZOPickerProps
   public constructor(props) {
     super(props)
     this.handlePrpos()
@@ -116,8 +116,12 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
       hidden: false
     })
   }
+
   public render(): JSX.Element {
     // 闹钟
+    if (Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
+      return
+    }
     const getAlarmClockOrCountDown = (label = ['','']) => {
       const hourRange = [
         ...this.getTimeRange(0, 23),
@@ -185,6 +189,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     }
     let pickerView
     switch (this.props.mode) {
+
       case 'alarmClock':
         pickerView = getAlarmClockOrCountDown(['', ''])
         break
