@@ -1,7 +1,7 @@
 {
   "miniprogramRoot": "./dist",
-  "projectname": "zo-taro-ui",
-  "description": "zo-taro-ui",
+  "projectname": "app",
+  "description": "",
   "appid": "touristappid",
   "setting": {
     "urlCheck": true,

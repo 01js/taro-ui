@@ -212,34 +212,32 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
           {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
         </View>
       )
-    } else {
-      return (
-        <View className={ rootClass }>
-          <View onClick={this.showPicker.bind(this)}>
-            {this.props.children}
-          </View>
-          {
-            <ZOActionSheet onClose={() => {this.setState({hidden: true})}} isOpened={!this.state.hidden}>
-              <View className="zo-picker__hd">
-                <View onClick={ this.onCancel.bind(this)} className="zo-picker__hd__action">取消</View>
-                <View className="zo-picker__title">
-                {
-                  this.props.title
-                }
-                </View>
-                <View onClick={ this.onChange.bind(this)} className="zo-picker__hd__action">确定</View>
-              </View>
-              <View className='zo-picker__bd'>
-                {
-                  pickerView
-                }
-                {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
-              </View>
-            </ZOActionSheet>
-          }
-        </View>
-      )
     }
-
+    return (
+      <View className={ rootClass }>
+        <View onClick={this.showPicker.bind(this)}>
+          {this.props.children}
+        </View>
+        {
+          <ZOActionSheet onClose={() => {this.setState({hidden: true})}} isOpened={!this.state.hidden}>
+            <View className="zo-picker__hd">
+              <View onClick={ this.onCancel.bind(this)} className="zo-picker__hd__action">取消</View>
+              <View className="zo-picker__title">
+              {
+                this.props.title
+              }
+              </View>
+              <View onClick={ this.onChange.bind(this)} className="zo-picker__hd__action">确定</View>
+            </View>
+            <View className='zo-picker__bd'>
+              {
+                pickerView
+              }
+              {this.props.mode === 'alarmClock' && <View className="zo-picker__bd__desc">:</View>}
+            </View>
+          </ZOActionSheet>
+        }
+      </View>
+    )
   }
 }
