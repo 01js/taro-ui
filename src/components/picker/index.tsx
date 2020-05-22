@@ -115,6 +115,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     this.setState({
       hidden: false
     })
+    this.props.onShow && this.props.onShow()
   }
 
   public render(): JSX.Element {
