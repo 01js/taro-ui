@@ -224,7 +224,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
           {this.props.children}
         </View>
         {
-          <ZOActionSheet onClose={(e) => {this.setState({hidden: true}); this.props.onClose && this.props.onClose(e)}} isOpened={!this.state.hidden}>
+          <ZOActionSheet onClose={(e) => {this.setState({hidden: true}); this.props.onCancel && this.props.onCancel(e)}} isOpened={!this.state.hidden}>
             <View className="zo-picker__hd">
               <View onClick={ this.onCancel.bind(this)} className="zo-picker__hd__action">取消</View>
               <View className="zo-picker__title">
