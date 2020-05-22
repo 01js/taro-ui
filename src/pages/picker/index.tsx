@@ -90,7 +90,7 @@ class Index extends Component {
         <ZOPicker onChange={this.onChange.bind(this)} value={['09:11:21']} mode='delay'>
         </ZOPicker>
 
-        <ZOPicker title={'定时'} onChange={this.onChange.bind(this)} value={['09:11']} mode='countDown'>
+        <ZOPicker showPicker={true} onCancel={() => {console.log(222)}} onShow={() => {console.log(111)}} title={'定时'} onChange={this.onChange.bind(this)} value={['09:11']} mode='countDown'>
           111
         </ZOPicker>
 

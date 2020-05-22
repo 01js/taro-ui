@@ -10,15 +10,20 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
   public static defaultProps: ZOPickerProps
   public constructor(props) {
     super(props)
+
     this.handlePrpos()
+
     this.state = {
       height: [],
       index: [],
-      hidden: true,
+      hidden: !props.showPicker,
     }
   }
   private handlePrpos = (nextProps = this.props):void => {
-    let { value, mode } = nextProps
+    let { value, mode, showPicker } = nextProps
+    if (showPicker) {
+      this.props.onShow && this.props.onShow()
+    }
     if (mode === 'alarmClock' || mode === 'countDown') {
       let str = value ? value[0] : '01:01'
       const time = str.split(':').map(n => +n)
@@ -123,6 +128,7 @@ export default class ZOPickerBar extends ZOComponent<ZOPickerProps, ZOPickerStat
     if (Taro.getEnv() !== Taro.ENV_TYPE.WEB) {
       return
     }
+
     const getAlarmClockOrCountDown = (label = ['','']) => {
       const hourRange = [
         ...this.getTimeRange(0, 23),
