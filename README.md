@@ -1,11 +1,11 @@
-# zo-taro-ui
+# @01js/taro-ui
 npm publish 发布
 
 
 ### 基本用法
 
 ```bash
-npm install zo-taro-ui -s
+npm install @01js/taro-ui -s
 ```
 
 
