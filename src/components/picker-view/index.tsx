@@ -97,9 +97,11 @@ export default class ZOPickerView extends ZOComponent<ZOPickerViewProps, ZOPicke
       this.props.className
     )
     const range = this.props.range || []
+    const columnId = this.props.columnId || ''
+    const isRatio = this.props.isRatio || false
     const pickerItem = range.map(item => {
       const content = item
-      return <View className='zo-picker-view__item'>{`${content}`}<Text className='zo-picker-view__item__label'>{`${this.props.label?this.props.label:''}`}</Text></View>
+      return <View className={`zo-picker-view__item ${isRatio ? `zo-picker-view__ratio ${columnId === '0' ? 'item__left' : 'item__right'}` : ''}`}>{`${content}`}<Text className='zo-picker-view__item__label'>{`${this.props.label?this.props.label:''}`}</Text></View>
     })
     return (
       <View className={rootClass} onTouchStart={this.onTouchStart.bind(this)}

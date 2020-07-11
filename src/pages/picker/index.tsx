@@ -1,15 +1,15 @@
-import { ComponentClass } from 'react'
-import Taro, { Component, Config } from '@tarojs/taro'
-import { View } from '@tarojs/components'
+import { ComponentClass } from "react";
+import Taro, { Component, Config } from "@tarojs/taro";
+import { View } from "@tarojs/components";
 
 // components
-import { default as ZOPicker } from '../../components/picker'
+import { default as ZOPicker } from "../../components/picker";
 
-import { connect } from '@tarojs/redux'
+import { connect } from "@tarojs/redux";
 
-import { add, minus, asyncAdd } from '../../actions/counter'
+import { add, minus, asyncAdd } from "../../actions/counter";
 
-import './index.scss'
+import "./index.scss";
 
 // #region 书写注意
 //
@@ -23,79 +23,106 @@ import './index.scss'
 
 type PageStateProps = {
   counter: {
-    num: number
-  }
-}
+    num: number;
+  };
+};
 
 type PageDispatchProps = {
-  add: () => void
-  dec: () => void
-  asyncAdd: () => any
-}
+  add: () => void;
+  dec: () => void;
+  asyncAdd: () => any;
+};
 
-type PageOwnProps = {}
+type PageOwnProps = {};
 
-type PageState = {}
+type PageState = {};
 
-type IProps = PageStateProps & PageDispatchProps & PageOwnProps
+type IProps = PageStateProps & PageDispatchProps & PageOwnProps;
 
 interface Index {
   props: IProps;
 }
 
-@connect(({ counter }) => ({
-  counter
-}), (dispatch) => ({
-  add () {
-    dispatch(add())
-  },
-  dec () {
-    dispatch(minus())
-  },
-  asyncAdd () {
-    dispatch(asyncAdd())
-  }
-}))
+@connect(
+  ({ counter }) => ({
+    counter,
+  }),
+  (dispatch) => ({
+    add() {
+      dispatch(add());
+    },
+    dec() {
+      dispatch(minus());
+    },
+    asyncAdd() {
+      dispatch(asyncAdd());
+    },
+  })
+)
 class Index extends Component {
-
-    /**
+  /**
    * 指定config的类型声明为: Taro.Config
    *
    * 由于 typescript 对于 object 类型推导只能推出 Key 的基本类型
    * 对于像 navigationBarTextStyle: 'black' 这样的推导出的类型是 string
    * 提示和声明 navigationBarTextStyle: 'black' | 'white' 类型冲突, 需要显示声明类型
    */
-    config: Config = {
-    navigationBarTitleText: '首页'
+  config: Config = {
+    navigationBarTitleText: "首页",
+  };
+
+  componentWillReceiveProps(nextProps) {
+    console.log(this.props, nextProps);
   }
 
-  componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+  componentWillUnmount() {}
+
+  componentDidShow() {}
+
+  componentDidHide() {}
+  onChange(e) {
+    console.log(e);
   }
-
-  componentWillUnmount () { }
-
-  componentDidShow () { }
-
-  componentDidHide () { }
-  onChange (e) {
-    console.log(e)
-  }
-  render () {
+  render() {
     return (
-      <View className='index'>
-        <ZOPicker onChange={this.onChange.bind(this)} value={['09:11']} mode='alarmClock'>
+      <View className="index">
+        <ZOPicker
+          onChange={this.onChange.bind(this)}
+          value={["09:11"]}
+          mode="alarmClock"
+        ></ZOPicker>
+        <ZOPicker
+          title={"定时"}
+          onChange={this.onChange.bind(this)}
+          value={["0.0"]}
+          mode="ratio"
+        >
+          比例
         </ZOPicker>
 
-        <ZOPicker onChange={this.onChange.bind(this)} value={['09:11:21']} mode='delay'>
-        </ZOPicker>
+        <ZOPicker
+          onChange={this.onChange.bind(this)}
+          value={["09:11:21"]}
+          mode="delay"
+        ></ZOPicker>
 
-        <ZOPicker title={'定时'} onChange={this.onChange.bind(this)} value={['09:11']} mode='countDown'>
-          111
+        <ZOPicker
+          showPicker={false}
+          onCancel={() => {
+            console.log(222);
+          }}
+          onShow={() => {
+            console.log(111);
+          }}
+          title={"定时"}
+          onChange={this.onChange.bind(this)}
+          value={["09:11"]}
+          mode="countDown"
+        >
+          定时
         </ZOPicker>
-
       </View>
-    )
+    );
   }
 }
 
@@ -106,4 +133,4 @@ class Index extends Component {
 //
 // #endregion
 
-export default Index as ComponentClass<PageOwnProps, PageState>
+export default Index as ComponentClass<PageOwnProps, PageState>;

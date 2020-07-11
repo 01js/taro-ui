@@ -60,5 +60,16 @@
       margin-left: 2Px;/*no*/
     }
   }
+  &__ratio {
+    display: block;
+  }
+  .item__left {
+    padding-right: 40px;
+    text-align: right;
+  }
+  .item__right {
+    padding-left: 40px;
+    text-align: left;
+  }
 
 }
