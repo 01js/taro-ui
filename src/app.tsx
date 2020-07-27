@@ -1,3 +1,4 @@
+import '@tarojs/async-await'
 import Taro, { Component, Config } from '@tarojs/taro'
 import { Provider } from '@tarojs/redux'
 
@@ -26,29 +27,28 @@ class App extends Component {
   config: Config = {
     pages: [
       'pages/picker/index',
-      'pages/nav-bar/index',
+
       'pages/picker-view/index',
+
+
+      'pages/nav-bar/index',
 
       'pages/action-sheet/index',
       'pages/default-page/index',
+
+
       'pages/modal/index',
+
       'pages/index/index',
     ],
     window: {
       backgroundTextStyle: 'light',
       navigationBarBackgroundColor: '#fff',
       navigationBarTitleText: 'WeChat',
-      navigationBarTextStyle: 'black',
-      navigationStyle: 'custom'
+      navigationBarTextStyle: 'black'
     }
   }
-  componentWillMount() {
-    Taro.getSystemInfo({
-      success: res => {
-        Taro.$navBarMarginTop = res.statusBarHeight || 0;
-      }
-    });
-  }
+
   componentDidMount () {}
 
   componentDidShow () {}

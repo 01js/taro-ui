@@ -99,7 +99,7 @@ export default class ZONavBar extends ZOComponent<ZONavBarProps> {
         style={
           {
             ...customStyle,
-            'padding-top': Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? Number(Taro.$navBarMarginTop ? Taro.$navBarMarginTop : 0 ) + 44 + 'rpx' : ''
+            'padding-top': Taro.getEnv() === Taro.ENV_TYPE.WEAPP ? Number(Taro.$navBarMarginTop ? Taro.$navBarMarginTop : 0 )  + 'rpx' : ''
           }
         }
       >
