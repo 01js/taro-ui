@@ -20,9 +20,9 @@ export default class ZOPickerBar extends ZOComponent<
     };
   }
   private handlePrpos = (nextProps = this.props): void => {
-    let { value, mode, showPicker } = nextProps
+    let { value, mode, showPicker } = nextProps;
     if (showPicker) {
-      this.props.onShow && this.props.onShow()
+      this.props.onShow && this.props.onShow();
     }
     if (mode === "alarmClock" || mode === "countDown") {
       let str = value ? value[0] : "01:01";
@@ -107,17 +107,14 @@ export default class ZOPickerBar extends ZOComponent<
     return e;
   }
   delayChange(height, columnId, e) {
-    if (
-      this.props.mode === "alarmClock" ||
-      this.props.mode === "delay"
-    ) {
+    if (this.props.mode === "alarmClock" || this.props.mode === "delay") {
       setTimeout(() => {
         this.onColumnChange(height, columnId, e);
       }, 100);
     }
   }
   onChange(e) {
-    this.setState({hidden: true})
+    this.setState({ hidden: true });
     let index = this.state.height.map((h) => (TOP - h) / LINE_HEIGHT);
     const eventObj = this.getEventObj(e, "change", {
       value: index.length > 1 ? index : index[0],
@@ -261,44 +258,41 @@ export default class ZOPickerBar extends ZOComponent<
           )}
         </View>
       );
-    } else {
-      return (
-        <View className={rootClass}>
-          <View onClick={this.showPicker.bind(this)}>
-            {this.props.children}
-          </View>
-          {
-            <ZOActionSheet
-              onClose={() => {
-                this.setState({ hidden: true });
-              }}
-              isOpened={!this.state.hidden}
-            >
-              <View className="zo-picker__hd">
-                <View
-                  onClick={this.onCancel.bind(this)}
-                  className="zo-picker__hd__action"
-                >
-                  取消
-                </View>
-                <View className="zo-picker__title">{this.props.title}</View>
-                <View
-                  onClick={this.onChange.bind(this)}
-                  className="zo-picker__hd__action"
-                >
-                  确定
-                </View>
-              </View>
-              <View className="zo-picker__bd">
-                {pickerView}
-                {this.props.mode === "ratio" && (
-                  <View className="zo-picker__bd__desc">.</View>
-                )}
-              </View>
-            </ZOActionSheet>
-          }
-        </View>
-      );
     }
+    return (
+      <View className={rootClass}>
+        <View onClick={this.showPicker.bind(this)}>{this.props.children}</View>
+        {
+          <ZOActionSheet
+            onClose={() => {
+              this.setState({ hidden: true });
+            }}
+            isOpened={!this.state.hidden}
+          >
+            <View className="zo-picker__hd">
+              <View
+                onClick={this.onCancel.bind(this)}
+                className="zo-picker__hd__action"
+              >
+                取消
+              </View>
+              <View className="zo-picker__title">{this.props.title}</View>
+              <View
+                onClick={this.onChange.bind(this)}
+                className="zo-picker__hd__action"
+              >
+                确定
+              </View>
+            </View>
+            <View className="zo-picker__bd">
+              {pickerView}
+              {this.props.mode === "ratio" && (
+                <View className="zo-picker__bd__desc">.</View>
+              )}
+            </View>
+          </ZOActionSheet>
+        }
+      </View>
+    );
   }
 }
